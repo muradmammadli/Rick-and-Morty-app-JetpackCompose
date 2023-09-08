@@ -10,11 +10,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.az.rickandmortyapp.presentation.screens.HomeScreen
 import com.az.rickandmortyapp.presentation.screens.SetupNavGraph
+import com.az.rickandmortyapp.presentation.viewmodel.CharacterViewModel
 import com.az.rickandmortyapp.ui.theme.RickAndMortyAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     lateinit var navHostController: NavHostController
@@ -24,7 +29,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             RickAndMortyAppTheme {
                 navHostController = rememberNavController()
-                SetupNavGraph(navHostController = navHostController)
+                val characterViewModel:CharacterViewModel = hiltViewModel()
+                SetupNavGraph(navHostController = navHostController, characterViewModel = characterViewModel)
+
             }
         }
     }

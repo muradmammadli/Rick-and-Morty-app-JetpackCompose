@@ -22,7 +22,6 @@ object ApiModule {
             .baseUrl("https://rickandmortyapi.com/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build().create(ApiService::class.java)
-
     }
 
 

@@ -5,10 +5,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.az.rickandmortyapp.presentation.viewmodel.CharacterViewModel
 
 @Composable
 fun SetupNavGraph(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    characterViewModel: CharacterViewModel
 ){
     NavHost(
         navController = navHostController,
@@ -18,7 +20,7 @@ fun SetupNavGraph(
         composable(
             route = Screen.Home.route
         ){
-            HomeScreen(navHostController)
+            HomeScreen(navHostController,characterViewModel)
         }
 
         composable(
