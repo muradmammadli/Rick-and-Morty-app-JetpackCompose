@@ -16,7 +16,6 @@ class CharacterViewModel @Inject constructor(
 ):ViewModel() {
 
     fun getCharacters():Flow<List<Character>> = flow {
-        delay(1000)
         emit(getCharacterUseCase().results)
     }
 
