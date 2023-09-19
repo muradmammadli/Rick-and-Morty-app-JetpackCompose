@@ -53,23 +53,26 @@ fun CharacterListItem(character: Character, navController: NavController?) {
         )
 
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
         ) {
-            Column(
+            Image(
+                painter = rememberImagePainter(data = character.image),
+                contentDescription = null,
                 modifier = Modifier
-                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .height(160.dp)
+                    .clip(RoundedCornerShape(5.dp)),
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
-                    painter = rememberImagePainter(data = character.image),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(80.dp)
-                        .clip(RoundedCornerShape(5.dp)),
-                )
-                Spacer(modifier = Modifier.height(8.dp))
+
                 Text(
                     text = character.name,
                     fontWeight = FontWeight.Bold,
@@ -77,31 +80,33 @@ fun CharacterListItem(character: Character, navController: NavController?) {
                     color = textColor
                 )
 
+                Button(
+                    modifier = Modifier
+                        .size(width = 120.dp, height = 60.dp)
+                        .padding(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = buttonColor,
+                        contentColor = Color.White
+                    ),
+                    onClick = {
+                        navController?.navigate(route = "detail_screen/${character.id}")
+                    },
+                ) {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "Details",
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+
             }
 
-            Button(
-                modifier = Modifier
-                    .size(width = 120.dp, height = 60.dp)
-                    .padding(8.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = buttonColor,
-                    contentColor = Color.White
-                ),
-                onClick = {
-                    navController?.navigate(route = "detail_screen/${character.id}")
-                },
-            ) {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "Details",
-                        textAlign = TextAlign.Center
-                    )
-                }
-            }
+
         }
     }
 }
