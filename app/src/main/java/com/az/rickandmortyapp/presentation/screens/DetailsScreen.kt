@@ -2,27 +2,24 @@ package com.az.rickandmortyapp.presentation.screens
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.az.rickandmortyapp.R
+import com.az.rickandmortyapp.data.model.Character
+import com.az.rickandmortyapp.presentation.viewmodel.CharacterViewModel
 import com.az.rickandmortyapp.ui.theme.RickAndMortyAppTheme
 
 
@@ -31,10 +28,18 @@ import com.az.rickandmortyapp.ui.theme.RickAndMortyAppTheme
 @Composable
 fun DetailsScreen(
     navHostController: NavHostController,
-    id:Int
+    characterViewModel: CharacterViewModel,
+    id: Int
 ) {
 
     Log.d("afadfadfadf", id.toString())
+    val character by characterViewModel.getCharacterDetails(id)
+        .collectAsState(
+            initial = Character()
+        )
+
+    Log.d("Character", character.toString())
+
 
     val topBarBackgroundColor = colorResource(id = R.color.blue_100)
     val screenBackgroundColor = colorResource(id = R.color.gray100)
@@ -49,16 +54,19 @@ fun DetailsScreen(
             )
         },
         content = {
+            Column(modifier = Modifier.fillMaxSize()) {
 
+
+            }
         }
     )
 }
 
 
-@Composable
-@Preview(showBackground = true)
-fun DetatilsScreenPreview() {
-    RickAndMortyAppTheme {
-        DetailsScreen(rememberNavController(),1)
-    }
-}
+//@Composable
+//@Preview(showBackground = true)
+//fun DetatilsScreenPreview() {
+//    RickAndMortyAppTheme {
+//        DetailsScreen(rememberNavController(), characterViewModel,1)
+//    }
+//}

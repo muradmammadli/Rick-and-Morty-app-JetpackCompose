@@ -13,16 +13,16 @@ import com.az.rickandmortyapp.presentation.viewmodel.CharacterViewModel
 fun SetupNavGraph(
     navHostController: NavHostController,
     characterViewModel: CharacterViewModel
-){
+) {
     NavHost(
         navController = navHostController,
         startDestination = Screen.Home.route
-    ){
+    ) {
 
         composable(
             route = Screen.Home.route
-        ){
-            HomeScreen(navHostController,characterViewModel)
+        ) {
+            HomeScreen(navHostController, characterViewModel)
         }
 
         composable(
@@ -31,7 +31,7 @@ fun SetupNavGraph(
         ) { backStackEntry ->
             val arguments = requireNotNull(backStackEntry.arguments)
             val itemId = arguments.getInt("id")
-            DetailsScreen(navHostController, itemId)
+            DetailsScreen(navHostController, characterViewModel, itemId)
         }
     }
 

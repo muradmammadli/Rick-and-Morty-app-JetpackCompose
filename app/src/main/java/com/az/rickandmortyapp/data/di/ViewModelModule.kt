@@ -1,5 +1,6 @@
 package com.az.rickandmortyapp.data.di
 
+import com.az.rickandmortyapp.domain.usecase.GetCharacterDetailsUseCase
 import com.az.rickandmortyapp.domain.usecase.GetCharacterUseCase
 import com.az.rickandmortyapp.presentation.viewmodel.CharacterViewModel
 import dagger.Module
@@ -14,8 +15,11 @@ object ViewModelModule {
 
     @Provides
     @Singleton
-    fun provideCharacterViewModel(characterUseCase: GetCharacterUseCase):CharacterViewModel{
-        return CharacterViewModel(characterUseCase)
+    fun provideCharacterViewModel(
+        characterUseCase: GetCharacterUseCase,
+        characterDetailsUseCase: GetCharacterDetailsUseCase
+    ): CharacterViewModel {
+        return CharacterViewModel(characterUseCase, characterDetailsUseCase)
     }
 
 }
